@@ -36,12 +36,13 @@ jobs:
 
       - name: Run tests
         run: npm run test:run
+        env:
+          NODE_ENV: test
 
       - name: Build
         run: npm run build
         env:
           VITE_GITHUB_API_BASE_URL: https://api.github.com
-          VITE_GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
