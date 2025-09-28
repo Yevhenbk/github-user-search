@@ -10,6 +10,10 @@ This application serves multiple purposes:
 - **CI/CD pipeline implementation** with automated testing and deployment
 - **Modern React ecosystem** proficiency with TypeScript, Vite, and testing
 
+## 🎨 Preview
+
+![GitHub User Search Preview](./docs/images/project_preview.png)
+
 ## 🚀 Features
 
 - **Real-time GitHub user search** with debounced input
