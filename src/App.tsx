@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import SearchBar from "./components/SearchBar";
+import { searchUsers } from "./api/github";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [q, setQ] = useState("");
+  const [results, setResults] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!q) return;
+    searchUsers(q)
+      .then((data) => setResults(data.items))
+      .catch((err) => setError(err.message));
+  }, [q]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="p-4">
+      <h1 className="text-2xl font-bold">GitHub User Search</h1>
+      <SearchBar value={q} onChange={setQ} />
+      {error && <p className="text-red-500">{error}</p>}
+      <ul>
+        {results.map((u) => (
+          <li key={u.id}>
+            <img src={u.avatar_url} width={36} height={36} alt="avatar" />
+            <a href={u.html_url} target="_blank" rel="noreferrer">{u.login}</a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
 }
-
-export default App
