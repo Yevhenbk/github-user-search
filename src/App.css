@@ -1,42 +1,199 @@
-#root {
-  max-width: 1280px;
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%);
+  padding: var(--spacing-xl) 0;
+}
+
+.app-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 var(--spacing-md);
+}
+
+.app-header {
   text-align: center;
+  margin-bottom: var(--spacing-3xl);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-sm);
+  background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.app-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-600);
+  font-weight: var(--font-weight-normal);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-section {
+  margin-bottom: var(--spacing-3xl);
+  display: flex;
+  justify-content: center;
+}
+
+.main-content {
+  min-height: 400px;
+}
+
+/* Loading spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl) var(--spacing-md);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-gray-200);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: var(--color-gray-600);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Error message */
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-lg);
+  color: var(--color-error);
+  margin: var(--spacing-xl) auto;
+  max-width: 500px;
+}
+
+.error-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.error-message p {
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Users grid */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md) 0;
+}
+
+/* Empty states */
+.no-results,
+.welcome-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-3xl) var(--spacing-md);
+  color: var(--color-gray-500);
+}
+
+.no-results-icon,
+.welcome-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.6;
+}
+
+.no-results h3,
+.welcome-state h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-sm);
+}
+
+.no-results p,
+.welcome-state p {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-500);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .app {
+    padding: var(--spacing-lg) 0;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .app-container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .app-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .app-title {
+    font-size: 2.5rem;
+  }
+  
+  .app-subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .search-section {
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .users-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .loading-container,
+  .no-results,
+  .welcome-state {
+    padding: var(--spacing-2xl) var(--spacing-sm);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 2rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  
+  .users-grid {
+    gap: var(--spacing-md);
+  }
+  
+  .no-results-icon,
+  .welcome-icon {
+    width: 48px;
+    height: 48px;
+  }
 }
